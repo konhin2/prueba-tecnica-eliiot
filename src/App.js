@@ -15,6 +15,7 @@ import CurrencyState from './context/CurrencyState'
 function App() {
   return (
     <>
+      <CurrencyState>
       <Router>
         <Switch>
           {/* Public Routes */}
@@ -22,6 +23,7 @@ function App() {
           <Route component={NotFound} />
         </Switch>
       </Router>
+      </CurrencyState>
     </>
   );
 }

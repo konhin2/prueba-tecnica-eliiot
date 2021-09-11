@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import CurrencyContext from './../../context/CurrencyContext'
+
 
 export default function Body() {
+    const context = useContext(CurrencyContext)
+    const {
+        currency,
+    } = context
     return (
         <div className="my-8 mx-5">
             <div className="text-center text-xl text-eliiot-g2 font-bold">
@@ -24,7 +30,7 @@ export default function Body() {
                     <h2>United States Dollar</h2>
                 </div>
                 <div className="pt-4 px-4 pb-4">
-                    <input className="p-4 w-full h-12 rounded-3xl font-normal text-eliiot-b3" value="$39,815.3417"/>
+                    <input className="p-4 w-full h-12 rounded-3xl font-normal text-eliiot-b3" value={'$ ' + currency} readOnly/>
                 </div>
             </div>
         </div>

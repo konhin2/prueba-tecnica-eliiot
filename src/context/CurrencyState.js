@@ -5,13 +5,14 @@ import CurrencyReducer from './CurrencyReducer'
 
 const CurrencyState = (props) => {
     const initialState = {
-        currency: ''
+        currency: '0'
     }
 
     const [globalState, dispatch] = useReducer(CurrencyReducer, initialState)
     const getInfo = async () => {
         try {
             const response = await axios.get('https://www.blockchain.com/es/api')
+            console.log(response)
             dispatch({
                 type: "GET_CURRENCIES",
                 payload: response.data.url
