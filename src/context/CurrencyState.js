@@ -9,13 +9,17 @@ const CurrencyState = (props) => {
     }
 
     const [globalState, dispatch] = useReducer(CurrencyReducer, initialState)
-    const getInfo = async () => {
+    const getInfo = async (curr) => {
         try {
-            const response = await axios.get('https://www.blockchain.com/es/api')
-            console.log(response)
+            const config = {
+                headers: {
+                    accept: "application/json",
+                }
+            }
+            const response = await axios.get(`https://api.blockchain.com/v3/exchange/tickers/${curr.target.name}`, config)
             dispatch({
                 type: "GET_CURRENCIES",
-                payload: response.data.url
+                payload: response.data.price_24h
             })
         } catch (e) { }
     }
