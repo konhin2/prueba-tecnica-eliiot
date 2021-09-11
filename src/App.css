@@ -13,5 +13,10 @@ body {
 
 .adj-btn {
   position: relative;
-  bottom: calc(560px - 100vh + 30px)
+  bottom: calc(560px - 100vh + 60px)
+}
+@media all and (min-width: 768px) {
+  .mediaQ > div {
+    padding: 2em 20%;
+  }
 }

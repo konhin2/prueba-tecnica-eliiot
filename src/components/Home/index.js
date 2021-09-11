@@ -4,7 +4,7 @@ import Body from './Body'
 
 export default function Index() {
     return (
-        <div>
+        <div className="mediaQ">
             <Header />
             <Body />
         </div>

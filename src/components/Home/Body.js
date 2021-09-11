@@ -10,6 +10,9 @@ export default function Body() {
     } = context
     const [currentCur, setCurrentCur] = useState("United States Dollar")
     const [change, setChange] = useState("BTC-USD")
+    if (currency === '0') {
+        getInfo("BTC-USD")
+    }
     // Funciones
     const changeCurrency = (event) => {
         switch (event.target.name) {
@@ -99,7 +102,7 @@ export default function Body() {
                 </div>
             </div>
             <div className="adj-btn my-8 mx-5">
-                <button name={change} type="button" className="w-full h-full flex justify-center items-center px-4 py-3 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-eliiot-b1 hover:bg-eliiot-b4" onClick={(e) => getInfo(e)}>
+                <button type="button" className="w-full h-full flex justify-center items-center px-4 py-3 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-eliiot-b1 hover:bg-eliiot-b4" onClick={() => getInfo(change)}>
                     Actualizar
                 </button>
             </div>
