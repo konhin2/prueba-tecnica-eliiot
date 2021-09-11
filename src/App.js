@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import {
+  Switch,
+  Route,
+  BrowserRouter as Router
+} from 'react-router-dom'
+
+// Views
+import Home from './components/Home'
+import NotFound from './components/NotFound'
+
+// Global Context
+import CurrencyState from './context/CurrencyState'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <Switch>
+          {/* Public Routes */}
+          <Route exact patch="/" component={Home} />
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
+    </>
   );
 }
 
