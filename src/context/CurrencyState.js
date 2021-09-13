@@ -26,37 +26,32 @@ const CurrencyState = (props) => {
         } catch (e) { }
     }
     const setText = (curr) => {
+        let msg = ''
+        let url = ''
         switch (curr) {
             case 'BTC-USD':
-                dispatch({
-                    type: "SET_INFO",
-                    payload: {
-                        msg: "United States Dollar",
-                        url: "BTC-USD"
-                    }
-                })
-                return
+                msg = "United States Dollar"
+                url = "BTC-USD"
+                break
             case 'BTC-GBP':
-                dispatch({
-                    type: "SET_INFO",
-                    payload: {
-                        msg: "Great Britain Pound",
-                        url: "BTC-GBP"
-                    }
-                })
-                return
+                msg = "Great Britain Pound"
+                url = "BTC-GBP"
+                break
             case 'BTC-EUR':
-                dispatch({
-                    type: "SET_INFO",
-                    payload: {
-                        msg: "Euro",
-                        url: "BTC-EUR"
-                    }
-                })
-                return
+                msg = "Euro"
+                url = "BTC-EUR"
+                break
             default:
-                return
+                break
         }
+        dispatch({
+            type: "SET_INFO",
+            payload: {
+                msg,
+                url
+            }
+        })
+        return
     }
     const formatNumber = (num) => {
         if (num >= 1000 && num.toString().includes('.')) {
