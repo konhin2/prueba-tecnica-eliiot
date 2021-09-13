@@ -16,7 +16,7 @@ export default function Header() {
                         <div className="flex items-center px-6 py-4">
                             <div className="w-full">
                                 <div className="relative">
-                                    <p className="text-center text-eliiot-b3 font-medium text-base">Resumen Bitcoin</p>
+                                    <span className="block text-center text-eliiot-b3 font-medium text-base">Resumen Bitcoin</span>
                                 </div>
                             </div>
                         </div>

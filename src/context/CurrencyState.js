@@ -5,32 +5,58 @@ import CurrencyReducer from './CurrencyReducer'
 
 const CurrencyState = (props) => {
     const initialState = {
-        currency: '0'
+        currency: '0',
+        msg: 'United States Dollar',
+        url: 'BTC-USD'
     }
 
     const [globalState, dispatch] = useReducer(CurrencyReducer, initialState)
     const getInfo = async (curr) => {
+        const config = {
+            headers: {
+                accept: "application/json",
+            }
+        }
         try {
-            const config = {
-                headers: {
-                    accept: "application/json",
-                }
-            }
-            if (typeof curr === "string") {
-                const response = await axios.get(`https://api.blockchain.com/v3/exchange/tickers/${curr}`, config)
-                dispatch({
-                    type: "GET_CURRENCIES",
-                    payload: formatNumber(response.data.price_24h)
-                })
-            } else {
-                const response = await axios.get(`https://api.blockchain.com/v3/exchange/tickers/${curr.target.name}`, config)
-                dispatch({
-                    type: "GET_CURRENCIES",
-                    payload: formatNumber(response.data.price_24h)
-                })
-            }
-
+            const response = await axios.get(`https://api.blockchain.com/v3/exchange/tickers/${curr}`, config)
+            dispatch({
+                type: "GET_CURRENCIES",
+                payload: formatNumber(response.data.price_24h)
+            })
         } catch (e) { }
+    }
+    const setText = (curr) => {
+        switch (curr) {
+            case 'BTC-USD':
+                dispatch({
+                    type: "SET_INFO",
+                    payload: {
+                        msg: "United States Dollar",
+                        url: "BTC-USD"
+                    }
+                })
+                return
+            case 'BTC-GBP':
+                dispatch({
+                    type: "SET_INFO",
+                    payload: {
+                        msg: "Great Britain Pound",
+                        url: "BTC-GBP"
+                    }
+                })
+                return
+            case 'BTC-EUR':
+                dispatch({
+                    type: "SET_INFO",
+                    payload: {
+                        msg: "Euro",
+                        url: "BTC-EUR"
+                    }
+                })
+                return
+            default:
+                return
+        }
     }
     const formatNumber = (num) => {
         if (num >= 1000 && num.toString().includes('.')) {
@@ -39,7 +65,7 @@ const CurrencyState = (props) => {
             for (let i = splitted[0].length - 1; i >= 0; i--) {
                 if (result.length % 3 === 0 && result.length > 0) {
                     result = splitted[0].charAt(i) + "," + result
-                } else {
+                } else {
                     result = splitted[0].charAt(i) + result
                 }
             }
@@ -48,14 +74,14 @@ const CurrencyState = (props) => {
             } else {
                 return result + '.' + splitted[1]
             }
-            
+
         } else if (num >= 1000) {
             const string = num.toString()
             let result = ""
             for (let i = string.length - 1; i >= 0; i--) {
                 if (result.length % 3 === 0 && result.length > 0) {
                     result = string.charAt(i) + "," + result
-                } else {
+                } else {
                     result = string.charAt(i) + result
                 }
             }
@@ -70,7 +96,14 @@ const CurrencyState = (props) => {
     }
 
     return (
-        <CurrencyContext.Provider value={{ currency: globalState.currency, getInfo }}>
+        <CurrencyContext.Provider value={{
+            currency: globalState.currency,
+            msg: globalState.msg,
+            url: globalState.url,
+            getInfo,
+            setText
+        }}
+        >
             {props.children}
         </CurrencyContext.Provider>
     )
